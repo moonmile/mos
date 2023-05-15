@@ -12,7 +12,7 @@ mysql -u root -p
 ```
 create database mosdb ;
 create user 'mos'@'localhost' identified by 'mos' ;
-grant all mos.* to 'mos'@'localhost'
+grant all on mosdb.* to 'mos'@'localhost'
 ```
 
 ```
@@ -22,7 +22,7 @@ mysql -u mos -p
 で、パスワード mos で入れること
 
 
-## omposer install 
+## Composer install 
 
 ```
 composer install 
