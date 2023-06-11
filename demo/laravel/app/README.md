@@ -12,7 +12,7 @@ mysql -u root -p
 ```
 create database mosdb ;
 create user 'mos'@'localhost' identified by 'mos' ;
-grant all on mosdb.* to 'mos'@'localhost'
+grant all on mosdb.* to 'mos'@'localhost' ;
 ```
 
 ```

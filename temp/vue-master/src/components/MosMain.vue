@@ -1,38 +1,38 @@
-
 <template>
-    <h1>Mos Main</h1>
-
     <div>
-        <ul>
-           <li v-for="it in items" :key="it.id">
-                {{ it.id }} : <a @click="onClickItem(it)">{{ it.title }}</a>
-            </li> 
-        </ul>
-    </div>
-    <hr />
-    <div>
-        <table class="table">
-            <tr>
-                <td>id: </td><td>{{  cur.id }}</td>
-            </tr>
-            <tr>
-                <td>title: </td><td>{{  cur.title }}</td>
-            </tr>
-            <tr>
-                <td>image: </td><td>{{  cur.image }}</td>
-            </tr>
-            <tr>
-                <td>作成日時: </td><td>{{  cur.created_at }}</td>
-            </tr>
-            <tr>
-                <td>更新日時: </td><td>{{  cur.updated_at }}</td>
-            </tr>
-        </table>
+        <h1>Mos Main by vue3 </h1>
+        <div>
+            <ul>
+            <li v-for="it in items" :key="it.id">
+                    {{ it.id }} : <a @click="onClickItem(it)">{{ it.title }}</a>
+                </li> 
+            </ul>
+        </div>
+        <hr />
+        <div>
+            <table class="table">
+                <tr>
+                    <td>id: </td><td>{{  cur.id }}</td>
+                </tr>
+                <tr>
+                    <td>title: </td><td>{{  cur.title }}</td>
+                </tr>
+                <tr>
+                    <td>image: </td><td>{{  cur.image }}</td>
+                </tr>
+                <tr>
+                    <td>作成日時: </td><td>{{  cur.created_at }}</td>
+                </tr>
+                <tr>
+                    <td>更新日時: </td><td>{{  cur.updated_at }}</td>
+                </tr>
+            </table>
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
 /**
@@ -86,6 +86,8 @@ function onClickItem( item : Category) {
 
 
 // ページ表示時に、カテゴリ一覧を取得する
-getCategories() 
+onMounted(()=>{
+    getCategories() 
+})
 
 </script>
