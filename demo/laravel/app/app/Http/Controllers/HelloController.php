@@ -13,7 +13,7 @@ class HelloController extends Controller
         
         $result = [
             'result' => true,
-            'message' => 'Hello, MASUDA',
+            'message' => 'Hello, masuda',
         ];
         return $result ;
     }
