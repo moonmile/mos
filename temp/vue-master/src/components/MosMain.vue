@@ -10,8 +10,12 @@
         </div>
         <hr />
         <button @click="onClickCreateItem" class="btn btn-primary">新規作成</button>　  
-        <button @click="onClickUpdateItem" class="btn btn-secondary">更新</button>　
-        <button @click="onClickDeleteItem" class="btn btn-danger">削除</button>
+        <button @click="onClickUpdateItem"
+            class="btn btn-secondary"
+            :disabled="mode_new">更新</button>　
+        <button @click="onClickDeleteItem"
+            class="btn btn-danger"
+            :disabled="mode_new">削除</button>
 
         <hr />
         <!-- カテゴリ情報を表示 -->
@@ -26,37 +30,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import axios from 'axios'
-import MosEditCategory from './MosEditCategory.vue';
-
-/**
- * カテゴリのクラス
- */
-class Category {
-    id: number
-    title: string
-    category: string
-    image: string
-    created_at: string | null
-    updated_at: string | null
-    is_delete: boolean
-}
+import MosEditCategory, { MODE } from './MosEditCategory.vue';
+import { Category } from '../libs/Category';
 
 // カテゴリ一覧
 const items = ref([] as Category[])
 // 選択したカテゴリ
 const cur = ref({} as Category)
-// 表示モード（列挙型)
-enum MODE {
-    DETAIL,     // 詳細
-    NEW,        // 新規作成
-    UPDATE,     // 更新
-    DELETE,     //　削除
-}
+// モードの切り替え
 const mode = ref(MODE.DETAIL)
-
-
+const mode_new = computed(()=>{
+    return mode.value == MODE.NEW ? true: false 
+})
 
 /**
  * カテゴリ一覧を取得する

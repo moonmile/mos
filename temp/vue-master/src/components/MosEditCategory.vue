@@ -114,32 +114,22 @@
     </div>
 </template>
 
-<script setup lang="ts">
-import { ref, reactive, onUpdated, watch, computed } from 'vue'
-import axios from 'axios'
-import _ from 'lodash'
-
-/**
- * カテゴリのクラス
- */
- class Category {
-    id: number
-    title: string
-    category: string
-    image: string
-    created_at: string | null
-    updated_at: string | null
-    is_delete: boolean
-}
+<script lang="ts">
 
 // 表示モード（列挙型)
-enum MODE {
+export enum MODE {
     DETAIL,     // 詳細
     NEW,        // 新規作成
     UPDATE,     // 更新
     DELETE,     //　削除
 }
+</script>
 
+<script setup lang="ts">
+import { ref, reactive, onUpdated, watch, computed } from 'vue'
+import axios from 'axios'
+import _ from 'lodash'
+import { Category } from '../libs/Category';
 
 const props = defineProps({
     item: { type: Object },
@@ -215,6 +205,5 @@ watch(cur, (next, old) => {
     // 削除 API を呼び出す
     // deleteCategory( cur.value )
 }
-
 
 </script>
