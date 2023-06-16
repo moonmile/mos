@@ -17,7 +17,11 @@
         <!-- カテゴリ情報を表示 -->
         <mos-edit-category 
             v-model:item="cur" 
-            v-model:mode="mode"/>
+            v-model:mode="mode"
+            v-on:onClickCommit="onClickCommit"
+            v-on:onClickDelete="onClickDelete"
+            
+            />
     </div>
 </template>
 
@@ -121,6 +125,69 @@ function onClickDeleteItem() {
     console.log( "onClickDeleteItem " + cur.value.title )
     mode.value = MODE.DELETE
 }
+
+/**
+ * 登録ボタンを押下
+ */
+ function onClickCommit( item : Category ) {
+    console.log( "main:onClickCommit " + item.title )
+    console.log( "main:onClickCommit " + item.image )
+    if ( mode.value == MODE.NEW ) {
+        // 新規作成の場合 POST を呼ぶ
+        createCategory( item )
+    } else {
+        // 更新の場合 PUT を呼ぶ
+        updateCategory( item )
+    }
+}
+
+/**
+ * 削除するボタンを押下
+ */
+ function onClickDelete( item : Category ) {
+    console.log( "main:onClickDelete ")
+    // 削除 API を呼び出す
+    deleteCategory( item )
+}
+
+
+//////////////////////////////////////////////////
+// API 
+//////////////////////////////////////////////////
+/**
+ * 新規作成のAPIを呼ぶ
+ * @param item 更新する Category 
+ */
+ function createCategory( item: Category ) {
+    console.log( "called createCategory" )
+    // TODO: POST を記述する
+    return 
+}
+/**
+ * 更新のAPIを呼ぶ
+ * @param item 更新する Category 
+ */
+ function updateCategory( item: Category ) {
+    console.log( "called updateCategory" )
+    // TODO: PUT を記述する
+    axios.put(`http://localhost:8000/api/category/${item.id}`, item )
+    .then ( response => {
+        console.log( response )
+        cur.value = response.data
+    })
+    return 
+}
+
+/**
+ * 削除のAPIを呼ぶ
+ * @param item 削除する Category 
+ */
+ function deleteCategory( item: Category ) {
+    console.log( "called deleteCategory" )
+    // TODO: DELETE を記述する
+    return 
+}
+
 
 // ページ表示時に、カテゴリ一覧を取得する
 onMounted(()=>{

@@ -146,6 +146,13 @@ const props = defineProps({
     mode: { type: Object },
 })
 
+const emit = defineEmits(['onClickCommit', 'onClickDelete'])
+/*
+const emit = defineEmits<{
+  (event: 'onClickCommit', item: Category): void
+}>()
+*/
+
 // モード
 const mode = computed(() => props.mode ?? 0 as MODE)
 // 選択したカテゴリ
@@ -153,44 +160,22 @@ const cur = computed(() => props.item as Category)
 
 // 変更前のカテゴリを保存しておく
 let original = {} as Category
+
 watch(cur, (next, old) => {
     original = _.cloneDeep(next)
 })
 
 
-/**
- * 新規作成のAPIを呼ぶ
- * @param item 更新する Category 
- */
- function createCategory( item: Category ) {
-    console.log( "called createCategory" )
-    // TODO: POST を記述する
-    return 
-}
-/**
- * 更新のAPIを呼ぶ
- * @param item 更新する Category 
- */
- function updateCategory( item: Category ) {
-    console.log( "called updateCategory" )
-    // TODO: PUT を記述する
-    return 
-}
-/**
- * 削除のAPIを呼ぶ
- * @param item 削除する Category 
- */
- function deleteCategory( item: Category ) {
-    console.log( "called deleteCategory" )
-    // TODO: DELETE を記述する
-    return 
-}
+
 
 
 /**
  * 登録ボタンを押下
  */
  function onClickCommit() {
+    console.log( "child:onClickCommit " + cur.value.title )
+    emit('onClickCommit', cur.value )
+    /*
     console.log( "onClickCommit " + cur.value.title )
     console.log( "onClickCommit " + cur.value.image )
     if ( mode.value == MODE.NEW ) {
@@ -200,6 +185,7 @@ watch(cur, (next, old) => {
         // 更新の場合 PUT を呼ぶ
         updateCategory( cur.value )
     }
+    */
 }
 
 /**
@@ -224,9 +210,10 @@ watch(cur, (next, old) => {
  * 削除するボタンを押下
  */
  function onClickDelete() {
-    console.log( "onClickDelete ")
+    console.log( "child:onClickDelete ")
+    emit('onClickDelete', cur.value )
     // 削除 API を呼び出す
-    deleteCategory( cur.value )
+    // deleteCategory( cur.value )
 }
 
 
