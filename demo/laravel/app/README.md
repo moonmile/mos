@@ -39,6 +39,7 @@ DB_CONNECTION=mysql
 DB_HOST=localhost
 DB_PORT=3306
 DB_DATABASE=mosdb
+DB_DATABASE=mosdb
 DB_USERNAME=mos
 DB_PASSWORD=mos
 ```
@@ -47,7 +48,7 @@ DB_PASSWORD=mos
 ## データの投入 の作成
 
 ```
-php artisan migrate:fresh --seed
+php artisan migrate:flush --seed
 ```
 
 
