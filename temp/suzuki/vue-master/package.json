@@ -1,0 +1,20 @@
+{
+  "name": "vue-master",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.195",
+    "axios": "^1.4.0",
+    "lodash": "^4.17.21",
+    "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.0.0",
+    "vite": "^4.1.4"
+  }
+}
